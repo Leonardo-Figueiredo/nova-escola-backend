@@ -1,4 +1,5 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
+import { parseISO, format } from 'date-fns';
 
 import Client from '../models/Client';
 
@@ -21,6 +22,14 @@ class ClientRepository extends Repository<Client> {
     const [clients, total] = await this.findAndCount({
       skip: limite * pagina - limite,
       take: limite,
+    });
+
+    clients.forEach(client => {
+      const { dataDeNascimento } = client;
+
+      const parsedDate = format(parseISO(dataDeNascimento), 'dd/MM/yyyy');
+
+      client.dataDeNascimento = parsedDate;
     });
 
     const clientList = {

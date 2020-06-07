@@ -37,4 +37,8 @@ clientsRouter.get('/:id', async (request, response) => {
   return response.json(client);
 });
 
+clientsRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+});
+
 export default clientsRouter;
