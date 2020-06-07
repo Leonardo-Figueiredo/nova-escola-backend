@@ -1,9 +1,10 @@
 /* eslint-disable prefer-destructuring */
+import { getCustomRepository } from 'typeorm';
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
 
-import Client from '../models/Client';
 import CreateClientService from '../services/CreateClientService';
+import FindClientService from '../services/FindClientService';
+import ClientRepository from '../repositories/ClientRepository';
 
 const clientsRouter = Router();
 
@@ -20,14 +21,20 @@ clientsRouter.post('/', async (request, response) => {
 clientsRouter.get('/', async (request, response) => {
   const { limite = 10, pagina = 1 } = request.query;
 
-  const clientRepository = getRepository(Client);
+  const clientRepository = getCustomRepository(ClientRepository);
 
-  const clients = await clientRepository.findAndCount({
-    skip: limite * pagina - limite,
-    take: limite,
-  });
+  const clients = await clientRepository.getClientList({ limite, pagina });
 
   return response.json(clients);
+});
+
+clientsRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+  const findClientService = new FindClientService();
+
+  const client = await findClientService.execute({ id });
+
+  return response.json(client);
 });
 
 export default clientsRouter;

@@ -1,4 +1,5 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
+import ClientRepository from '../repositories/ClientRepository';
 import Client from '../models/Client';
 import AppError from '../errors/AppError';
 
@@ -14,7 +15,7 @@ class CreateClientService {
     email,
     dataDeNascimento,
   }: RequestDTO): Promise<Client> {
-    const clientRepository = getRepository(Client);
+    const clientRepository = getCustomRepository(ClientRepository);
     const clientAlreadyExists = await clientRepository.findOne({
       email,
     });
