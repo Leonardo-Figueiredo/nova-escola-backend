@@ -58,8 +58,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable no-param-reassign */
 var typeorm_1 = require("typeorm");
-var dateFormatter_1 = __importDefault(require("../utils/dateFormatter"));
 var Client_1 = __importDefault(require("../models/Client"));
 var ClientRepository = /** @class */ (function (_super) {
     __extends(ClientRepository, _super);
@@ -67,22 +67,17 @@ var ClientRepository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     ClientRepository.prototype.getClientList = function (_a) {
-        var limite = _a.limite, pagina = _a.pagina;
+        var parsedLimite = _a.parsedLimite, parsedPagina = _a.parsedPagina;
         return __awaiter(this, void 0, void 0, function () {
             var _b, clients, total, clientList;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0: return [4 /*yield*/, this.findAndCount({
-                            skip: limite * pagina - limite,
-                            take: limite,
+                            skip: parsedLimite * parsedPagina - parsedLimite,
+                            take: parsedLimite,
                         })];
                     case 1:
                         _b = _c.sent(), clients = _b[0], total = _b[1];
-                        clients.forEach(function (client) {
-                            var dataDeNascimento = client.dataDeNascimento;
-                            var parsedDate = dateFormatter_1.default(dataDeNascimento);
-                            client.dataDeNascimento = parsedDate;
-                        });
                         clientList = {
                             total: total,
                             lista: clients,

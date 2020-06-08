@@ -112,7 +112,7 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.list = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, _b, limite, _c, pagina, schema, error_2, clientRepository, clients;
+            var _a, _b, limite, _c, pagina, schema, error_2, clientRepository, parsedLimite, parsedPagina, clients;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -133,9 +133,11 @@ var UserController = /** @class */ (function () {
                         throw new AppError_1.default(error_2.message);
                     case 4:
                         clientRepository = typeorm_1.getCustomRepository(ClientRepository_1.default);
+                        parsedLimite = Number(limite);
+                        parsedPagina = Number(pagina);
                         return [4 /*yield*/, clientRepository.getClientList({
-                                limite: limite,
-                                pagina: pagina,
+                                parsedLimite: parsedLimite,
+                                parsedPagina: parsedPagina,
                             })];
                     case 5:
                         clients = _d.sent();

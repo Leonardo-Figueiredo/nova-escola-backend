@@ -33,12 +33,6 @@ class CreateClientService {
 
     await clientRepository.save(client);
 
-    // const newClient = {
-    //   id: client.id,
-    //   ...client,
-    //   dataDeNascimento: format(client.dataDeNascimento, 'dd/MM/yyy'),
-    // };
-
     return client;
   }
 }

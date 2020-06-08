@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var dateFormatter_1 = __importDefault(require("../utils/dateFormatter"));
 var AppError_1 = __importDefault(require("../errors/AppError"));
 var ClientRepository_1 = __importDefault(require("../repositories/ClientRepository"));
 var FindClientService = /** @class */ (function () {
@@ -48,19 +47,16 @@ var FindClientService = /** @class */ (function () {
     }
     FindClientService.prototype.execute = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var clientRepository, client, dataDeNascimento, parsedDate;
+            var clientRepository, client;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         clientRepository = typeorm_1.getCustomRepository(ClientRepository_1.default);
-                        return [4 /*yield*/, clientRepository.findOne({ id: id })];
+                        return [4 /*yield*/, clientRepository.findOne(id)];
                     case 1:
                         client = _a.sent();
                         if (!client)
                             throw new AppError_1.default('Client not found.', 404);
-                        dataDeNascimento = client.dataDeNascimento;
-                        parsedDate = dateFormatter_1.default(dataDeNascimento);
-                        client.dataDeNascimento = parsedDate;
                         return [2 /*return*/, client];
                 }
             });

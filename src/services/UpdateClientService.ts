@@ -45,11 +45,6 @@ class UpdateClientService {
 
     await clientRepository.save(client);
 
-    // const updatedClient = {
-    //   ...client,
-    //   dataDeNascimento: format(client.dataDeNascimento, 'dd/MM/yyyy'),
-    // };
-
     return client;
   }
 }

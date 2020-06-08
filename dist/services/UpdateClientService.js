@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var date_fns_1 = require("date-fns");
 var AppError_1 = __importDefault(require("../errors/AppError"));
 var ClientRepository_1 = __importDefault(require("../repositories/ClientRepository"));
 var UpdateClientService = /** @class */ (function () {
@@ -60,7 +48,7 @@ var UpdateClientService = /** @class */ (function () {
     UpdateClientService.prototype.execute = function (_a) {
         var id = _a.id, nome = _a.nome, email = _a.email, dataDeNascimento = _a.dataDeNascimento;
         return __awaiter(this, void 0, void 0, function () {
-            var clientRepository, client, duplicatedEmail, parsedDate, updatedClient;
+            var clientRepository, client, duplicatedEmail, parsedDate;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -90,8 +78,11 @@ var UpdateClientService = /** @class */ (function () {
                         return [4 /*yield*/, clientRepository.save(client)];
                     case 4:
                         _b.sent();
-                        updatedClient = __assign(__assign({}, client), { dataDeNascimento: date_fns_1.format(client.dataDeNascimento, 'dd/MM/yyyy') });
-                        return [2 /*return*/, updatedClient];
+                        // const updatedClient = {
+                        //   ...client,
+                        //   dataDeNascimento: format(client.dataDeNascimento, 'dd/MM/yyyy'),
+                        // };
+                        return [2 /*return*/, client];
                 }
             });
         });

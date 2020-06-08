@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var date_fns_1 = require("date-fns");
 var AppError_1 = __importDefault(require("../errors/AppError"));
 var ClientRepository_1 = __importDefault(require("../repositories/ClientRepository"));
 var CreateClientService = /** @class */ (function () {
@@ -60,7 +48,7 @@ var CreateClientService = /** @class */ (function () {
     CreateClientService.prototype.execute = function (_a) {
         var nome = _a.nome, email = _a.email, dataDeNascimento = _a.dataDeNascimento;
         return __awaiter(this, void 0, void 0, function () {
-            var clientRepository, clientAlreadyExists, parsedDate, client, newClient;
+            var clientRepository, clientAlreadyExists, parsedDate, client;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -81,8 +69,12 @@ var CreateClientService = /** @class */ (function () {
                         return [4 /*yield*/, clientRepository.save(client)];
                     case 2:
                         _b.sent();
-                        newClient = __assign(__assign({ id: client.id }, client), { dataDeNascimento: date_fns_1.format(client.dataDeNascimento, 'dd/MM/yyy') });
-                        return [2 /*return*/, newClient];
+                        // const newClient = {
+                        //   id: client.id,
+                        //   ...client,
+                        //   dataDeNascimento: format(client.dataDeNascimento, 'dd/MM/yyy'),
+                        // };
+                        return [2 /*return*/, client];
                 }
             });
         });
