@@ -1,7 +1,10 @@
 import { getCustomRepository } from 'typeorm';
+import { format } from 'date-fns';
+
+import AppError from '../errors/AppError';
+
 import ClientRepository from '../repositories/ClientRepository';
 import Client from '../models/Client';
-import AppError from '../errors/AppError';
 
 interface RequestDTO {
   nome: string;
@@ -31,7 +34,13 @@ class CreateClientService {
 
     await clientRepository.save(client);
 
-    return client;
+    const newClient = {
+      id: client.id,
+      ...client,
+      dataDeNascimento: format(client.dataDeNascimento, 'dd/MM/yyy'),
+    };
+
+    return newClient;
   }
 }
 

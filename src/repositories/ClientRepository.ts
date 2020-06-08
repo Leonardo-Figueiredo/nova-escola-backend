@@ -1,5 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { parseISO, format } from 'date-fns';
+
+import dateFormatter from '../utils/dateFormatter';
 
 import Client from '../models/Client';
 
@@ -27,7 +28,7 @@ class ClientRepository extends Repository<Client> {
     clients.forEach(client => {
       const { dataDeNascimento } = client;
 
-      const parsedDate = format(parseISO(dataDeNascimento), 'dd/MM/yyyy');
+      const parsedDate = dateFormatter(dataDeNascimento);
 
       client.dataDeNascimento = parsedDate;
     });
