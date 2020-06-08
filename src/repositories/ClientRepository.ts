@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { EntityRepository, Repository } from 'typeorm';
 
-import dateFormatter from '../utils/dateFormatter';
-
 import Client from '../models/Client';
 
 interface PaginationParams {

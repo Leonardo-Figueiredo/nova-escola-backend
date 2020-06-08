@@ -1,6 +1,5 @@
 import { getCustomRepository } from 'typeorm';
 
-import dateFormatter from '../utils/dateFormatter';
 import AppError from '../errors/AppError';
 
 import ClientRepository from '../repositories/ClientRepository';

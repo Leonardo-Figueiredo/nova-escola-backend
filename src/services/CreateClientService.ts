@@ -1,5 +1,4 @@
 import { getCustomRepository } from 'typeorm';
-import { format } from 'date-fns';
 
 import AppError from '../errors/AppError';
 
