@@ -66,9 +66,12 @@ class UserController {
 
     const clientRepository = getCustomRepository(ClientRepository);
 
+    const parsedLimite = Number(limite);
+    const parsedPagina = Number(pagina);
+
     const clients = await clientRepository.getClientList({
-      limite,
-      pagina,
+      parsedLimite,
+      parsedPagina,
     });
 
     return response.json(clients);
@@ -138,7 +141,7 @@ class UserController {
         id: Yup.number().positive().integer().required('ID is required.'),
       });
 
-      await schema.validate(request.query);
+      await schema.validate(request.params);
     } catch (error) {
       throw new AppError(error.message);
     }
