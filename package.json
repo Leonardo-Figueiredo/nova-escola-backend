@@ -8,7 +8,11 @@
     "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "test": "jest",
-    "start": "ts-node-dev ./node_modules/typeorm/cli.js migration:run; ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts"
+    "start": "ts-node-dev ./node_modules/typeorm/cli.js migration:run; ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
+    "start:migrations": "ts-node-dev ./node_modules/typeorm/cli.js migration:run",
+    "revert:migrations": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert",
+    "start:app": "ts-node-dev ./dist/server"
+
   },
   "dependencies": {
     "cors": "^2.8.5",
